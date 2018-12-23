@@ -1,0 +1,8 @@
+.idea/
+gradle/
+frontend/dist/
+frontend/e2e/
+frontend/node_modules/
+backend/.gradle/
+backend/build/
+backend/dev_server/

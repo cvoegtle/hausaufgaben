@@ -1,0 +1,49 @@
+allprojects {
+    repositories {
+        maven {
+            url 'https://maven-central.storage.googleapis.com'             // Google's mirror of Maven Central
+        }
+        jcenter()
+        mavenCentral()
+    }
+}
+
+subprojects {
+    version = '1.0'
+}
+
+def angularOutputDir = "$projectDir/frontend/dist"
+def webappDir = "$projectDir/backend/src/main/webapp"
+
+task appengineDeploy {
+    dependsOn 'build'
+    finalizedBy 'backend:appengineDeploy'
+}
+
+task build(type: GradleBuild) {
+    dependsOn 'copyToWebApp'
+    finalizedBy ':backend:build'
+}
+
+task explodedWar(type: Sync) {
+    dependsOn ':backend:explodedWar'
+}
+
+task copyToWebApp(type:Copy) {
+    dependsOn ':frontend:build'
+    copy {
+        from "$angularOutputDir"
+        into "$webappDir"
+        include '**'
+    }
+    copy {
+        from "$projectDir/backend/configuration"
+        into "$webappDir"
+        include "configuration.json"
+    }
+}
+
+task clean(type:Delete) {
+    dependsOn ':frontend:clean', ':backend:clean'
+}
+

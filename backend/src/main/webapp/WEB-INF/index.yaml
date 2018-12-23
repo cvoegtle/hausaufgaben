@@ -1,0 +1,11 @@
+indexes:
+  - kind: Klasse
+    ancestor: no
+    properties:
+      - name: name
+        direction: asc
+  - kind: Hausaufgabe
+    ancestor: yes
+    properties:
+      - name: date
+      - name: fach
