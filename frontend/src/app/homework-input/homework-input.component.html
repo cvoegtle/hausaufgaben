@@ -1,0 +1,16 @@
+<mat-card>
+  <form class="homework-full-width">
+      <mat-form-field class="homework-full-width">
+        <mat-select placeholder="Fach">
+          <mat-option *ngFor="let fach of faecher" [value]="fach.key">{{fach.description}}</mat-option>
+        </mat-select>
+      </mat-form-field>
+    <mat-form-field class="homework-full-width">
+        <textarea matInput placeholder="Aufgabe" [(ngModel)]="aufgabe.aufgabe" matTextareaAutosize
+                  matAutosizeMinRows="2" matAutosizeMaxRows="5" name="editAufgabe"></textarea>
+    </mat-form-field>
+    <button (click)="createHomework()" color="primary" [disabled]="!isCreatePossible()" mat-raised-button>speichern</button>
+  </form>
+
+
+</mat-card>
