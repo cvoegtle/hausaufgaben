@@ -12,6 +12,11 @@ export class HomeworkViewComponent implements OnInit {
 
   constructor() { }
 
+  getDate() {
+    let date = new Date(this.hausaufgabe.datum);
+    return new Intl.DateTimeFormat('de-DE').format(date);
+  }
+
   ngOnInit() {
   }
 
