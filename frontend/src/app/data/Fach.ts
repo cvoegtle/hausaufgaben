@@ -7,8 +7,8 @@ export class Fach {
 
 export function createFachArray(): Array<Fach> {
   return [
-    {key: FachEnum.DEUTSCH, description: "Deutsch"},
-    {key: FachEnum.ENGLISCH, description: "Englisch"},
-    {key: FachEnum.MATHEMATIK, description: "Mathe"}
+    {key: FachEnum.Deutsch, description: "Deutsch"},
+    {key: FachEnum.Englisch, description: "Englisch"},
+    {key: FachEnum.Mathematik, description: "Mathe"}
   ];
 }

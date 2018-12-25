@@ -18,13 +18,13 @@ export class HomeworkService {
   constructor(private http: HttpClient, private configurationService: ConfigurationService) {
   }
 
-  fetchHausaufgaben(start: Date, end: Date): Observable<Hausaufgabe[]> {
-    return this.http.get<Hausaufgabe[]>(`${this.getBaseUrl()}/list?start=${start}&end=${end}&unique=${unique()}`, httpOptions).pipe(
+  fetchHausaufgaben(): Observable<Hausaufgabe[]> {
+    return this.http.get<Hausaufgabe[]>(`${this.getBaseUrl()}/list?unique=${unique()}`, httpOptions).pipe(
         catchError(handleError<Hausaufgabe[]>('list')));
   }
 
   createHausaufgabe(aufgabe: Hausaufgabe): Observable<boolean> {
-    return this.http.post<boolean>(`${this.getBaseUrl()}/create`, aufgabe, httpOptions).pipe(catchError(handleError<boolean>('create')));
+    return this.http.post<boolean>(`${this.getBaseUrl()}/create?unique=${unique()}`, aufgabe, httpOptions).pipe(catchError(handleError<boolean>('create')));
   }
 
 

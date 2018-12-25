@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ConfigurationService } from "./service/configuration.service";
+import { Hausaufgabe } from "./data/Hausaufgabe";
+import { HomeworkService } from "./service/homework.service";
 
 @Component({
   selector: 'app-root',
@@ -7,8 +9,9 @@ import { ConfigurationService } from "./service/configuration.service";
   styleUrls: ['./app.component.css']
 })
 export class AppComponent implements OnInit {
+  hausaufgaben: Hausaufgabe[];
 
-  constructor(private configurationService: ConfigurationService) {
+  constructor(private configurationService: ConfigurationService, private homeworkService: HomeworkService) {
   }
 
   ngOnInit(): void {
@@ -20,7 +23,8 @@ export class AppComponent implements OnInit {
 
   }
 
-  private fetchHomework() {
+  fetchHomework() {
 
+    this.homeworkService.fetchHausaufgaben().subscribe(fetchedHausaufgaben => this.hausaufgaben = fetchedHausaufgaben);
   }
 }

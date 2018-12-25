@@ -9,22 +9,18 @@ import { MatButtonModule, MatCardModule, MatInputModule, MatSelectModule } from 
 import { HttpClientModule } from "@angular/common/http";
 import { FormsModule } from "@angular/forms";
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
-
-@NgModule({
-  exports: [],
-  declarations: []
-})
-export class HomeworkMaterialModule {
-}
+import { HomeworkViewComponent } from './homework-view/homework-view.component';
+import { HomeworkListComponent } from './homework-list/homework-list.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    HomeworkInputComponent
+    HomeworkInputComponent,
+    HomeworkViewComponent,
+    HomeworkListComponent
   ],
   imports: [
-    BrowserModule, HttpClientModule, FormsModule, BrowserAnimationsModule, MatSelectModule, MatCardModule, MatButtonModule, MatInputModule,
-    HomeworkMaterialModule
+    BrowserModule, HttpClientModule, FormsModule, BrowserAnimationsModule, MatSelectModule, MatCardModule, MatButtonModule, MatInputModule
   ],
   providers: [HomeworkService, ConfigurationService],
   bootstrap: [AppComponent]

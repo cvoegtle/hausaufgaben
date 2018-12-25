@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { createFachArray, Fach } from "../data/Fach";
 import { Hausaufgabe } from "../data/Hausaufgabe";
 import { FachEnum } from "../data/FachEnum";
@@ -13,10 +13,12 @@ export class HomeworkInputComponent implements OnInit {
   faecher: Array<Fach> = createFachArray();
   aufgabe: Hausaufgabe = {
     id: null,
-    fach: FachEnum.DEUTSCH,
+    fach: FachEnum.Deutsch,
     aufgabe: "",
     datum: null
   };
+
+  @Output() created: EventEmitter<Hausaufgabe> = new EventEmitter<Hausaufgabe>();
 
   constructor(private homeworkService: HomeworkService) {
   }
@@ -32,6 +34,7 @@ export class HomeworkInputComponent implements OnInit {
   createHomework() {
     this.homeworkService.createHausaufgabe(this.aufgabe).subscribe(created => {
       if (created) {
+        this.created.emit(this.aufgabe);
         this.aufgabe.aufgabe = "";
       }
     })

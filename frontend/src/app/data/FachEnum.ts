@@ -1,4 +1,4 @@
 export enum FachEnum {
-  DEUTSCH, ENGLISCH, MATHEMATIK
+  Deutsch, Englisch, Mathematik
 }
 

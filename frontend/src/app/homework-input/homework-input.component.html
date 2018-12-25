@@ -1,7 +1,7 @@
 <mat-card>
   <form class="homework-full-width">
       <mat-form-field class="homework-full-width">
-        <mat-select placeholder="Fach">
+        <mat-select placeholder="Fach" [(value)]="aufgabe.fach">
           <mat-option *ngFor="let fach of faecher" [value]="fach.key">{{fach.description}}</mat-option>
         </mat-select>
       </mat-form-field>

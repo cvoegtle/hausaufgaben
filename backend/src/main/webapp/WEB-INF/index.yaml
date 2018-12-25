@@ -1,6 +1,7 @@
 indexes:
   - kind: Hausaufgabe
-    ancestor: yes
+    ancestor: no
     properties:
-      - name: date
+      - name: datum
+        direction: desc
       - name: fach
