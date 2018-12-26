@@ -14,9 +14,7 @@ import java.util.logging.Logger
 
 @RestController class HomeworkService {
   @GetMapping("/list") @CrossOrigin fun list(): List<Hausaufgabe> {
-    val hausaufgaben = ObjectifyService.ofy().load().type(Hausaufgabe::class.java).filter("datum >=", sevenDaysBefore()).order("-datum").list()
-    hausaufgaben.size
-    return hausaufgaben
+    return ObjectifyService.ofy().load().type(Hausaufgabe::class.java).filter("datum >=", sevenDaysBefore()).order("-datum").list()
   }
 
   private fun sevenDaysBefore() = Date().time - 7 * 24 * 60 * 60 * 1000
