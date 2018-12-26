@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Hausaufgabe } from "../data/Hausaufgabe";
 
 @Component({
@@ -7,11 +7,15 @@ import { Hausaufgabe } from "../data/Hausaufgabe";
   styleUrls: ['./homework-list.component.css']
 })
 export class HomeworkListComponent implements OnInit {
-  @Input() hausaufgaben: Hausaufgabe[]
+  @Input() hausaufgaben: Hausaufgabe[];
+  @Output() delete: EventEmitter<Hausaufgabe> = new EventEmitter<Hausaufgabe>();
 
   constructor() { }
 
   ngOnInit() {
   }
 
+  deleteClicked(hausaufgabe: Hausaufgabe) {
+    this.delete.emit(hausaufgabe);
+  }
 }

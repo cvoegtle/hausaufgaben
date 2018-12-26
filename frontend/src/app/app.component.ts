@@ -24,7 +24,10 @@ export class AppComponent implements OnInit {
   }
 
   fetchHomework() {
-
     this.homeworkService.fetchHausaufgaben().subscribe(fetchedHausaufgaben => this.hausaufgaben = fetchedHausaufgaben);
+  }
+
+  deleteClicked(hausaufgabe: Hausaufgabe) {
+    this.homeworkService.deleteHausaufgabe(hausaufgabe.id).subscribe(_ => this.fetchHomework());
   }
 }

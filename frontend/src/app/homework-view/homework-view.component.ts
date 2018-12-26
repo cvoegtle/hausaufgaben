@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Hausaufgabe } from "../data/Hausaufgabe";
 
 @Component({
@@ -9,6 +9,7 @@ import { Hausaufgabe } from "../data/Hausaufgabe";
 export class HomeworkViewComponent implements OnInit {
 
   @Input() hausaufgabe: Hausaufgabe;
+  @Output() delete: EventEmitter<Hausaufgabe> = new EventEmitter<Hausaufgabe>();
 
   constructor() { }
 
@@ -20,4 +21,7 @@ export class HomeworkViewComponent implements OnInit {
   ngOnInit() {
   }
 
+  deleteClicked() {
+    this.delete.emit(this.hausaufgabe);
+  }
 }

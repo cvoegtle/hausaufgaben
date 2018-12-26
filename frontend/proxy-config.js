@@ -2,6 +2,7 @@ const PROXY_CONFIG = [{
   context: [
     "/list",
     "/create",
+    "/delete",
     "/_ah"
   ],
   target: "http://localhost:8080",

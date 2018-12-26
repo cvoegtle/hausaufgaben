@@ -1,8 +1,9 @@
 .caption {
+    padding-top: 10px;
     font-weight: bold;
 }
 
-.description-line {
+.caption-line {
     width: 100%;
     display: flex;
     flex-direction: row;
@@ -10,7 +11,17 @@
 
 .description {
     margin-left: 20px;
-    max-width: 440px;
+    max-width: 460px;
     width: 100%;
     white-space: pre-wrap;
 }
+
+.homework-card {
+    width: 100%;
+    max-width: 510px;
+}
+
+.fill-remaining-space {
+    flex: 1 1 auto;
+}
+

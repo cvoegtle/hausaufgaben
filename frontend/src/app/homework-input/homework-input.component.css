@@ -1,4 +1,9 @@
 .homework-full-width {
-    max-width: 460px;
+    max-width: 480px;
     width: 100%;
+}
+
+.homework-card {
+    width: 100%;
+    max-width: 510px;
 }

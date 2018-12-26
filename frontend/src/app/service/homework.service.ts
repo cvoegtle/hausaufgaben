@@ -28,6 +28,11 @@ export class HomeworkService {
   }
 
 
+  deleteHausaufgabe(id: number): Observable<void> {
+    return this.http.get<void>(`${this.getBaseUrl()}/delete?id=${id}&unique=${unique()}`, httpOptions).pipe(catchError(handleError<void>('delete')));
+  }
+
+
   private getBaseUrl() {
     return this.configurationService.configuration.backendUrl;
   }
