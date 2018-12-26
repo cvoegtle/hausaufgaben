@@ -13,7 +13,7 @@ import java.util.logging.Level
 import java.util.logging.Logger
 
 @RestController class HomeworkService {
-  @GetMapping("/list") @CrossOrigin(origins = ["*"]) fun list(): List<Hausaufgabe> {
+  @GetMapping("/list") @CrossOrigin(origins = ["https://www.tom-schimmeck.de", "https://www.tom-schimmeck.de", "http://localhost:4200"]) fun list(): List<Hausaufgabe> {
     return ObjectifyService.ofy().load().type(Hausaufgabe::class.java).filter("datum >=", sevenDaysBefore()).order("-datum").list()
   }
 
