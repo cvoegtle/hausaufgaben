@@ -1,6 +1,7 @@
 package org.voegtle.homework
 
 import com.googlecode.objectify.ObjectifyService
+import org.springframework.web.bind.annotation.CrossOrigin
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.PostMapping
 import org.springframework.web.bind.annotation.RequestBody
@@ -12,7 +13,7 @@ import java.util.logging.Level
 import java.util.logging.Logger
 
 @RestController class HomeworkService {
-  @GetMapping("/list") fun list(): List<Hausaufgabe> {
+  @GetMapping("/list") @CrossOrigin fun list(): List<Hausaufgabe> {
     val hausaufgaben = ObjectifyService.ofy().load().type(Hausaufgabe::class.java).filter("datum >=", sevenDaysBefore()).order("-datum").list()
     hausaufgaben.size
     return hausaufgaben
