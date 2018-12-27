@@ -1,4 +1,4 @@
 export enum FachEnum {
-  Deutsch, Englisch, Mathematik
+  Mathematik, Deutsch, Englisch, Franzoesisch, Physik, Chemie, GW, Geschichte, Erdkunde, Musik, Religion
 }
 
