@@ -8,22 +8,24 @@ import org.springframework.web.bind.annotation.RequestBody
 import org.springframework.web.bind.annotation.RequestParam
 import org.springframework.web.bind.annotation.RestController
 import org.voegtle.homework.data.Hausaufgabe
+import org.voegtle.homework.persistence.deleteAufgabe
+import org.voegtle.homework.persistence.loadHomeworkSince
+import org.voegtle.homework.persistence.saveAufgabe
 import org.voegtle.homework.processing.setCurrentDate
 import java.util.Date
 import java.util.logging.Level
 import java.util.logging.Logger
 
 @RestController class HomeworkService {
-  @GetMapping("/list") @CrossOrigin(origins = ["https://www.tom-schimmeck.de", "https://www.tom-schimmeck.de", "http://localhost:4200"])
-  fun list(): List<Hausaufgabe> {
-    return ObjectifyService.ofy().load().type(Hausaufgabe::class.java).filter("datum >=", sevenDaysBefore()).order("-datum").list()
+  @GetMapping("/list") fun list(): List<Hausaufgabe> {
+    return loadHomeworkSince(sevenDaysBefore())
   }
 
   @PostMapping("/create") fun createHausaufgabe(@RequestBody() aufgabe: Hausaufgabe): Boolean {
     try {
       setCurrentDate(aufgabe)
       validate(aufgabe)
-      ObjectifyService.ofy().save().entity(aufgabe).now()
+      saveAufgabe(aufgabe)
       return true
     } catch (ex: Exception) {
       logException(ex)
@@ -32,10 +34,10 @@ import java.util.logging.Logger
   }
 
   @GetMapping("/delete") fun delete(@RequestParam id: Long) {
-    ObjectifyService.ofy().delete().type(Hausaufgabe::class.java).id(id).now()
+    deleteAufgabe(id)
   }
 
-  private fun sevenDaysBefore() = Date().time - 7 * 24 * 60 * 60 * 1000
+private fun sevenDaysBefore() = Date().time - 7 * 24 * 60 * 60 * 1000
 
   private fun logException(ex: Exception) {
     val log = Logger.getLogger("HomeworkService")
