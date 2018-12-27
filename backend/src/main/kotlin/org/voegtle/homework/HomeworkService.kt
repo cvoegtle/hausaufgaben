@@ -12,6 +12,7 @@ import org.voegtle.homework.persistence.deleteAufgabe
 import org.voegtle.homework.persistence.loadHomeworkSince
 import org.voegtle.homework.persistence.saveAufgabe
 import org.voegtle.homework.processing.setCurrentDate
+import org.voegtle.homework.processing.sevenDaysBefore
 import java.util.Date
 import java.util.logging.Level
 import java.util.logging.Logger
@@ -36,8 +37,6 @@ import java.util.logging.Logger
   @GetMapping("/delete") fun delete(@RequestParam id: Long) {
     deleteAufgabe(id)
   }
-
-private fun sevenDaysBefore() = Date().time - 7 * 24 * 60 * 60 * 1000
 
   private fun logException(ex: Exception) {
     val log = Logger.getLogger("HomeworkService")
