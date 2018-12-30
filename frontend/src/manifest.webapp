@@ -1,0 +1,11 @@
+{
+  "name": "Hausaufgaben",
+  "short_name": "Hausaufgaben",
+    "icons": [{
+          "src": "assets/school.png",
+          "sizes": "96x96",
+          "type": "image/png"
+        }],
+  "start_url": "https://hausaufgaben.appspot.com/",
+  "display": "standalone"
+}

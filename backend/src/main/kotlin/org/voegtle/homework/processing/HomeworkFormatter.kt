@@ -8,7 +8,7 @@ import java.util.Date
 import java.util.Locale
 
 class HomeworkFormatter {
-  val format = SimpleDateFormat("EEEE dd:MM", Locale.GERMANY)
+  val format = SimpleDateFormat("EEEE dd.MM", Locale.GERMANY)
   val formattedDays = ArrayList<FormattedDay>()
 
   fun format(hausaufgaben: List<Hausaufgabe>): List<FormattedDay> {

@@ -10,14 +10,13 @@
 }
 
 .description {
-    margin-left: 20px;
-    max-width: 460px;
+    padding-left: 20px;
+    max-width: 480px;
     width: 100%;
     white-space: pre-wrap;
 }
 
 .homework-card {
-    width: 100%;
     max-width: 510px;
 }
 
