@@ -2,7 +2,7 @@
   <div class="caption-line">
     <div class="caption">{{getDate()}} - {{hausaufgabe.fach}}</div>
     <span class="fill-remaining-space"></span>
-    <button mat-icon-button (click)="deleteClicked()" matTooltip="Hausaufgabe löschen">
+    <button mat-icon-button *ngIf="deleteAllowed" (click)="deleteClicked()" matTooltip="Hausaufgabe löschen">
       <i class="material-icons">delete</i>
     </button>
   </div>

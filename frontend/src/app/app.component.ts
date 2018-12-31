@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ConfigurationService } from "./service/configuration.service";
-import { Hausaufgabe } from "./data/Hausaufgabe";
-import { HomeworkService } from "./service/homework.service";
+import { UserService, UserStatus } from "./service/user.service";
+import { ActivatedRoute, Router } from "@angular/router";
+import { handleError } from "./service/helper";
 
 @Component({
   selector: 'app-root',
@@ -9,25 +10,42 @@ import { HomeworkService } from "./service/homework.service";
   styleUrls: ['./app.component.css']
 })
 export class AppComponent implements OnInit {
-  hausaufgaben: Hausaufgabe[];
+  userStatus: UserStatus;
 
-  constructor(private configurationService: ConfigurationService, private homeworkService: HomeworkService) {
+  constructor(private configurationService: ConfigurationService,
+              private userService: UserService,
+              private route: ActivatedRoute,
+              private router: Router) {
   }
 
   ngOnInit(): void {
     if (this.configurationService.isInitialised()) {
-      this.fetchHomework();
+      this.fetchStatus();
     } else {
-      this.configurationService.load().subscribe(_ => this.fetchHomework());
+      this.configurationService.load().subscribe(_ => this.fetchStatus());
     }
-
   }
 
-  fetchHomework() {
-    this.homeworkService.fetchHausaufgaben().subscribe(fetchedHausaufgaben => this.hausaufgaben = fetchedHausaufgaben);
+  private fetchStatus() {
+    return this.userService.fetchStatus().subscribe(status => this.processStatus(status),
+        _ => handleError<void>('fetchStatus'));
   }
 
-  deleteClicked(hausaufgabe: Hausaufgabe) {
-    this.homeworkService.deleteHausaufgabe(hausaufgabe.id).subscribe(_ => this.fetchHomework());
+  private processStatus(status: UserStatus) {
+    this.userStatus = status;
+    if (status.loggedIn) {
+      this.router.navigate(['edit']);
+    }
   }
+
+  logoutClicked(): void {
+    this.userService.clearStatus();
+    let logoutUrl = this.userStatus.url;
+    window.location.href = logoutUrl;
+  }
+
+  isLoggedIn(): boolean {
+    return this.userStatus != null && this.userStatus.loggedIn;
+  }
+
 }

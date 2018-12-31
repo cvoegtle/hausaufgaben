@@ -1,7 +1,5 @@
 package org.voegtle.homework
 
-import com.googlecode.objectify.ObjectifyService
-import org.springframework.web.bind.annotation.CrossOrigin
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.PostMapping
 import org.springframework.web.bind.annotation.RequestBody
@@ -13,16 +11,20 @@ import org.voegtle.homework.persistence.loadHomeworkSince
 import org.voegtle.homework.persistence.saveAufgabe
 import org.voegtle.homework.processing.setCurrentDate
 import org.voegtle.homework.processing.sevenDaysBefore
-import java.util.Date
+import org.voegtle.homework.util.checkAuthorisation
+import org.voegtle.homework.util.extractUserName
 import java.util.logging.Level
 import java.util.logging.Logger
+import javax.servlet.http.HttpServletRequest
 
 @RestController class HomeworkService {
   @GetMapping("/list") fun list(): List<Hausaufgabe> {
     return loadHomeworkSince(sevenDaysBefore())
   }
 
-  @PostMapping("/create") fun createHausaufgabe(@RequestBody() aufgabe: Hausaufgabe): Boolean {
+  @PostMapping("/create") fun createHausaufgabe(@RequestBody() aufgabe: Hausaufgabe, req: HttpServletRequest): Boolean {
+    val userName = extractUserName(req, true)
+    checkAuthorisation(userName)
     try {
       setCurrentDate(aufgabe)
       validate(aufgabe)
@@ -34,7 +36,9 @@ import java.util.logging.Logger
     }
   }
 
-  @GetMapping("/delete") fun delete(@RequestParam id: Long) {
+  @GetMapping("/delete") fun delete(@RequestParam id: Long, req: HttpServletRequest) {
+    val userName = extractUserName(req, true)
+    checkAuthorisation(userName)
     deleteAufgabe(id)
   }
 

@@ -9,6 +9,7 @@ import { Hausaufgabe } from "../data/Hausaufgabe";
 export class HomeworkViewComponent implements OnInit {
 
   @Input() hausaufgabe: Hausaufgabe;
+  @Input() deleteAllowed: boolean;
   @Output() delete: EventEmitter<Hausaufgabe> = new EventEmitter<Hausaufgabe>();
 
   constructor() { }

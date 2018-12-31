@@ -1,0 +1,3 @@
+<homework-input *ngIf="isAuthorised()" (created)="fetchHomework()"></homework-input>
+<homework-list [hausaufgaben]="hausaufgaben" [deleteAllowed]="isAuthorised()" (delete)="deleteClicked($event)"></homework-list>
+

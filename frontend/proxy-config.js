@@ -3,6 +3,7 @@ const PROXY_CONFIG = [{
     "/list",
     "/create",
     "/delete",
+    "/user",
     "/_ah"
   ],
   target: "http://localhost:8080",
