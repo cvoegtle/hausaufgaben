@@ -54,6 +54,6 @@ export class HomeworkComponent implements OnInit {
   }
 
   isAuthorised() {
-    return this.userStatus.authorised;
+    return this.userStatus != null && this.userStatus.authorised;
   }
 }
