@@ -9,6 +9,7 @@ import org.voegtle.homework.data.Hausaufgabe
 import org.voegtle.homework.persistence.deleteAufgabe
 import org.voegtle.homework.persistence.loadHomeworkSince
 import org.voegtle.homework.persistence.saveAufgabe
+import org.voegtle.homework.processing.add12Hours
 import org.voegtle.homework.processing.sevenDaysBefore
 import org.voegtle.homework.util.checkAuthorisation
 import org.voegtle.homework.util.extractUserName
@@ -25,6 +26,7 @@ import javax.servlet.http.HttpServletRequest
     val userName = extractUserName(req, true)
     checkAuthorisation(userName)
     try {
+      add12Hours(aufgabe)
       validate(aufgabe)
       saveAufgabe(aufgabe)
       return true

@@ -3,9 +3,11 @@ import { createFachArray, Fach } from "../data/Fach";
 import { Hausaufgabe } from "../data/Hausaufgabe";
 import { FachEnum } from "../data/FachEnum";
 import { HomeworkService } from "../service/homework.service";
-import {FormControl} from "@angular/forms";
+import { FormControl } from "@angular/forms";
+import { today } from "../util/date-helper";
+import * as _moment from 'moment';
 
-
+const moment = _moment;
 
 @Component({
   selector: 'homework-input',
@@ -18,10 +20,10 @@ export class HomeworkInputComponent implements OnInit {
     id: null,
     fach: FachEnum.Deutsch,
     aufgabe: "",
-    datum: new Date().getTime()
+    datum: today().getTime()
   };
 
-  datePickerForm = new FormControl(new Date());
+  datePickerForm = new FormControl(moment(today()));
 
 
   @Output() created: EventEmitter<Hausaufgabe> = new EventEmitter<Hausaufgabe>();
