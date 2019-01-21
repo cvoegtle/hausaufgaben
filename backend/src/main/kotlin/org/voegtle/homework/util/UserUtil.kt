@@ -20,13 +20,14 @@ fun checkAuthorisation(userName: String?) {
 
 fun isLoggedIn(userName: String?) = userName != null
 
-fun isAuthorised(userName: String?) = "cvoegtle@gmail.com" == userName || "tom.schimmeck@gmail.com" == userName
+fun isAuthorised(userName: String?)
+    = "cvoegtle@gmail.com" == userName || "tom.schimmeck@gmail.com" == userName || "benz1912dennis@gmail.com" == userName
 
 private fun logException(message: String) {
   val log = Logger.getLogger("UserUtil")
   log.warning(message)
 }
 
-class LoginRequiredException(override val message: String): Exception(message)
+class LoginRequiredException(override val message: String) : Exception(message)
 
-class PermissionDenied(override val message: String): Exception(message)
+class PermissionDenied(override val message: String) : Exception(message)
