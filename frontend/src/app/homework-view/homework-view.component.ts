@@ -1,5 +1,6 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Hausaufgabe } from "../data/Hausaufgabe";
+import { translate } from "../data/Fach";
 
 @Component({
   selector: 'homework-view',
@@ -24,5 +25,10 @@ export class HomeworkViewComponent implements OnInit {
 
   deleteClicked() {
     this.delete.emit(this.hausaufgabe);
+  }
+
+  getFach() {
+    let currentFach =  translate(this.hausaufgabe.fach);
+    return currentFach.description;
   }
 }

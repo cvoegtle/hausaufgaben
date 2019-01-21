@@ -20,3 +20,14 @@ export function createFachArray(): Array<Fach> {
     {key: FachEnum.Religion, description: "Kath. Religion"}
   ];
 }
+
+export function translate(fach: FachEnum): Fach {
+  let faecher: Array<Fach> = createFachArray();
+  for (let index in faecher) {
+    let current = faecher[index];
+    if (fach == current.key) {
+      return current;
+    }
+  }
+  return null;
+}

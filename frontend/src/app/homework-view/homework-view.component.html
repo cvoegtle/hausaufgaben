@@ -1,6 +1,6 @@
 <mat-card class="homework-card">
   <div class="caption-line">
-    <div class="caption">{{getDate()}} - {{hausaufgabe.fach}}</div>
+    <div class="caption">{{getDate()}} - {{getFach()}}</div>
     <span class="fill-remaining-space"></span>
     <button mat-icon-button *ngIf="deleteAllowed" (click)="deleteClicked()" matTooltip="Hausaufgabe löschen">
       <i class="material-icons">delete</i>
