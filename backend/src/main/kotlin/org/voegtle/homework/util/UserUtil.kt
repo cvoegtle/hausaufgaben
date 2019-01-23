@@ -20,8 +20,10 @@ fun checkAuthorisation(userName: String?) {
 
 fun isLoggedIn(userName: String?) = userName != null
 
-fun isAuthorised(userName: String?)
-    = "cvoegtle@gmail.com" == userName || "tom.schimmeck@gmail.com" == userName || "benz1912dennis@gmail.com" == userName
+fun isAuthorised(userName: String?) = equalsIgnoreCase("cvoegtle@gmail.com", userName) ||
+    equalsIgnoreCase("tom.schimmeck@gmail.com", userName) || equalsIgnoreCase("benz1912dennis@gmail.com", userName)
+
+fun equalsIgnoreCase(first: String, second: String?) = if (second == null) false else first.toLowerCase() == second.toLowerCase()
 
 private fun logException(message: String) {
   val log = Logger.getLogger("UserUtil")
