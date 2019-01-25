@@ -21,10 +21,6 @@ import javax.servlet.http.HttpServletRequest
 
   @GetMapping("/user/status")
   fun status(@RequestParam() startUrl: String, req: HttpServletRequest): UserStatus {
-//    ObjectifyService.ofy().save().entity(Administrator(gmailAddress = "cvoegtle@gmail.com", name = "Christian Vögtle", active = true)).now()
-//    ObjectifyService.ofy().save().entity(Administrator(gmailAddress = "tom.schimmeck@gmail.com", name = "Tom Schimmeck", active = true)).now()
-//    ObjectifyService.ofy().save().entity(Administrator(gmailAddress = "benz1912dennis@gmail.com", name = "Dennis", active = true)).now()
-
     val userName = extractOptionalUserName(req)
     val loggedIn = isLoggedIn(userName)
     val authorised = isAuthorisedNullable(userName)
