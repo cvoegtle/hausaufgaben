@@ -10,6 +10,7 @@ import org.voegtle.homework.persistence.deleteAufgabe
 import org.voegtle.homework.persistence.loadHomeworkSince
 import org.voegtle.homework.persistence.saveAufgabe
 import org.voegtle.homework.processing.add12Hours
+import org.voegtle.homework.processing.addCreator
 import org.voegtle.homework.processing.sevenDaysBefore
 import org.voegtle.homework.util.checkAuthorisation
 import org.voegtle.homework.util.extractUserName
@@ -23,9 +24,10 @@ import javax.servlet.http.HttpServletRequest
   }
 
   @PostMapping("/create") fun createHausaufgabe(@RequestBody() aufgabe: Hausaufgabe, req: HttpServletRequest): Boolean {
-    val userName = extractUserName(req, true)
+    val userName = extractUserName(req)
     checkAuthorisation(userName)
     try {
+      addCreator(aufgabe, userName)
       add12Hours(aufgabe)
       validate(aufgabe)
       saveAufgabe(aufgabe)
@@ -37,7 +39,7 @@ import javax.servlet.http.HttpServletRequest
   }
 
   @GetMapping("/delete") fun delete(@RequestParam id: Long, req: HttpServletRequest) {
-    val userName = extractUserName(req, true)
+    val userName = extractUserName(req)
     checkAuthorisation(userName)
     deleteAufgabe(id)
   }

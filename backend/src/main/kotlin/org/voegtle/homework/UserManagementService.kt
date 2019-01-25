@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.RequestParam
 import org.springframework.web.bind.annotation.RestController
 import org.voegtle.homework.data.UserStatus
+import org.voegtle.homework.util.extractOptionalUserName
 import org.voegtle.homework.util.extractUserName
 import org.voegtle.homework.util.isAuthorised
 import org.voegtle.homework.util.isLoggedIn
@@ -19,7 +20,7 @@ import javax.servlet.http.HttpServletRequest
 
   @GetMapping("/user/status")
   fun status(@RequestParam() startUrl: String, req: HttpServletRequest): UserStatus {
-    val userName = extractUserName(request = req, exceptionIfNull = false)
+    val userName = extractOptionalUserName(req)
     val loggedIn = isLoggedIn(userName)
     val authorised = isAuthorised(userName)
 

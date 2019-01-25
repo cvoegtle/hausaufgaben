@@ -3,9 +3,11 @@ package org.voegtle.homework.util
 import java.util.logging.Logger
 import javax.servlet.http.HttpServletRequest
 
-fun extractUserName(request: HttpServletRequest, exceptionIfNull: Boolean = true): String? {
-  val userName = request.userPrincipal?.name
-  if (exceptionIfNull && userName == null) {
+fun extractOptionalUserName(request: HttpServletRequest) = request.userPrincipal?.name
+
+fun extractUserName(request: HttpServletRequest): String {
+  val userName = extractOptionalUserName(request)
+  if (userName == null) {
     logException("This action requires a login")
     throw LoginRequiredException("This action requires a login")
   }
