@@ -1,5 +1,7 @@
 package org.voegtle.homework.util
 
+import com.googlecode.objectify.ObjectifyService
+import org.voegtle.homework.data.Administrator
 import java.util.logging.Logger
 import javax.servlet.http.HttpServletRequest
 
@@ -14,7 +16,7 @@ fun extractUserName(request: HttpServletRequest): String {
   return userName
 }
 
-fun checkAuthorisation(userName: String?) {
+fun checkAuthorisation(userName: String) {
   if (!isAuthorised(userName)) {
     throw PermissionDenied("Für diese Aktion bist Du nicht berechtigt")
   }
@@ -22,8 +24,13 @@ fun checkAuthorisation(userName: String?) {
 
 fun isLoggedIn(userName: String?) = userName != null
 
-fun isAuthorised(userName: String?) = equalsIgnoreCase("cvoegtle@gmail.com", userName) ||
-    equalsIgnoreCase("tom.schimmeck@gmail.com", userName) || equalsIgnoreCase("benz1912dennis@gmail.com", userName)
+fun isAuthorisedNullable(userName: String?) = userName != null && isAuthorised(userName)
+
+fun isAuthorised(userName: String): Boolean {
+  val users = ObjectifyService.ofy().load().type(Administrator::class.java).filter("gmailAddress", userName.toLowerCase()).filter("active", true)
+      .list()
+  return users.size == 1
+}
 
 fun equalsIgnoreCase(first: String, second: String?) = if (second == null) false else first.toLowerCase() == second.toLowerCase()
 

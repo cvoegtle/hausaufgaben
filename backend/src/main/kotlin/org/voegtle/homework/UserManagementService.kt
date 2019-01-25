@@ -2,13 +2,14 @@ package org.voegtle.homework
 
 import com.google.appengine.api.users.UserService
 import com.google.appengine.api.users.UserServiceFactory
+import com.googlecode.objectify.ObjectifyService
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.RequestParam
 import org.springframework.web.bind.annotation.RestController
+import org.voegtle.homework.data.Administrator
 import org.voegtle.homework.data.UserStatus
 import org.voegtle.homework.util.extractOptionalUserName
-import org.voegtle.homework.util.extractUserName
-import org.voegtle.homework.util.isAuthorised
+import org.voegtle.homework.util.isAuthorisedNullable
 import org.voegtle.homework.util.isLoggedIn
 import java.util.logging.Logger
 import javax.servlet.http.HttpServletRequest
@@ -20,9 +21,13 @@ import javax.servlet.http.HttpServletRequest
 
   @GetMapping("/user/status")
   fun status(@RequestParam() startUrl: String, req: HttpServletRequest): UserStatus {
+//    ObjectifyService.ofy().save().entity(Administrator(gmailAddress = "cvoegtle@gmail.com", name = "Christian Vögtle", active = true)).now()
+//    ObjectifyService.ofy().save().entity(Administrator(gmailAddress = "tom.schimmeck@gmail.com", name = "Tom Schimmeck", active = true)).now()
+//    ObjectifyService.ofy().save().entity(Administrator(gmailAddress = "benz1912dennis@gmail.com", name = "Dennis", active = true)).now()
+
     val userName = extractOptionalUserName(req)
     val loggedIn = isLoggedIn(userName)
-    val authorised = isAuthorised(userName)
+    val authorised = isAuthorisedNullable(userName)
 
     log.info("UserName=$userName,  currentUser=${userService?.currentUser?.email}")
 

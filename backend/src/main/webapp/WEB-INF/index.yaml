@@ -5,3 +5,8 @@ indexes:
       - name: datum
         direction: desc
       - name: fach
+  - kind: Administrator
+    ancestor: no
+    properties:
+      - name: gmailAddress
+      - name: active
