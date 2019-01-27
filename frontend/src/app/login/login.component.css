@@ -1,3 +1,8 @@
+.login-component {
+    width: 100%;
+    max-width: 542px;
+}
+
 .login-view {
     display: flex;
     flex-direction: column;

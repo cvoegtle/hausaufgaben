@@ -47,7 +47,7 @@ war {
 // [START model]
 appengine {  // App Engine tasks configuration
     deploy {
-        version = '8'
+        version = '9'
         projectId = 'hausaufgaben'
         stopPreviousVersion = true
         promote = true

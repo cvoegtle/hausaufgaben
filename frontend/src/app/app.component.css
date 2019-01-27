@@ -1,3 +1,8 @@
+.toolbar {
+    width: 100%;
+    max-width: 542px;
+}
+
 .working-area {
     margin-top: 8px;
 }

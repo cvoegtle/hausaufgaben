@@ -1,4 +1,4 @@
-<mat-toolbar color='primary'>
+<mat-toolbar color='primary' class="toolbar">
   <span>Hausaufgaben</span>
   <span class="fill-remaining-space"></span>
   <button *ngIf="isLoggedIn()" (click)="logoutClicked()" mat-raised-button color='accent'>{{userStatus?.name | name}}  <i class="material-icons" style="display: inline;margin-left: 5px;">power_settings_new</i></button>
@@ -7,7 +7,7 @@
   <router-outlet></router-outlet>
 </div>
 
-<span class="mat-body-1 app-footer">Hausaufgaben Version 9 - 25.1.2019</span>
+<span class="mat-body-1 app-footer">Hausaufgaben Version 10 - 26.1.2019</span>
 
 
 
